@@ -110,3 +110,21 @@ Response" {
 ![image](https://github.com/user-attachments/assets/f3c6665f-f055-4dc8-b938-4f99eb78b888)
 ![Uploading image.png…]()
 
+
+
+
+
+
+1. Database delle piste: Creare un database che memorizzi tutte le piste italiane registrate, incluse informazioni dettagliate come descrizione, foto, recensioni degli utenti, posizione geografica e altre informazioni rilevanti.
+2. Database degli utenti: Implementare un sistema di gestione utenti che conservi i dati personali degli utenti registrati, incluse informazioni sulle prenotazioni attuali e la cronologia delle prenotazioni effettuate.
+3. Creazione e eliminazione profili guidatore e pista: Consentire la registrazione di due tipi di utenti:
+   - Utente guidatore: utenti che possono prenotare piste.
+   - Utente pista: gestori di piste che possono inserire nuove piste e gestirne la disponibilità.
+4. Architettura client-server con comunicazione HTTP: L'applicazione deve essere divisa in due parti principali:
+   - Server-side: gestione del database, logica delle prenotazioni e comunicazione con i client.
+   - Client-side: interfaccia utente per i guidatori e gestori di piste, con accesso alle funzionalità offerte tramite chiamate HTTP.
+5. Filtraggio, ordinamento e ricerca delle piste: Implementare un sistema avanzato di ricerca che permetta agli utenti di filtrare le piste per vari criteri (es. posizione, disponibilità, valutazioni, costo) e di ordinarle in base alle preferenze personali.
+6. Invio email automatiche: Creare un sistema di notifiche automatiche via email per confermare la registrazione, le prenotazioni effettuate e altre comunicazioni importanti legate ai servizi dell’app.
+7. Prenotazione pista con opzioni aggiuntive: Integrare una funzionalità che consenta agli utenti di prenotare una pista specifica, con la possibilità di noleggiare attrezzature o veicoli necessari.
+8. Esposizione API: Sviluppare e documentare un'API pubblica che permetta a terze parti di interagire con l'applicazione, consultare piste disponibili, effettuare prenotazioni e altro.
+9. Piattaforma multipiattaforma: Garantire che l'applicazione sia compatibile con dispositivi mobili (Android, iOS) e web, per un'esperienza utente ottimale su tutte le piattaforme.
