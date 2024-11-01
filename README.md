@@ -115,16 +115,45 @@ Response" {
 
 
 
-1. Database delle piste: Creare un database che memorizzi tutte le piste italiane registrate, incluse informazioni dettagliate come descrizione, foto, recensioni degli utenti, posizione geografica e altre informazioni rilevanti.
-2. Database degli utenti: Implementare un sistema di gestione utenti che conservi i dati personali degli utenti registrati, incluse informazioni sulle prenotazioni attuali e la cronologia delle prenotazioni effettuate.
-3. Creazione e eliminazione profili guidatore e pista: Consentire la registrazione di due tipi di utenti:
-   - Utente guidatore: utenti che possono prenotare piste.
-   - Utente pista: gestori di piste che possono inserire nuove piste e gestirne la disponibilità.
-4. Architettura client-server con comunicazione HTTP: L'applicazione deve essere divisa in due parti principali:
-   - Server-side: gestione del database, logica delle prenotazioni e comunicazione con i client.
-   - Client-side: interfaccia utente per i guidatori e gestori di piste, con accesso alle funzionalità offerte tramite chiamate HTTP.
-5. Filtraggio, ordinamento e ricerca delle piste: Implementare un sistema avanzato di ricerca che permetta agli utenti di filtrare le piste per vari criteri (es. posizione, disponibilità, valutazioni, costo) e di ordinarle in base alle preferenze personali.
-6. Invio email automatiche: Creare un sistema di notifiche automatiche via email per confermare la registrazione, le prenotazioni effettuate e altre comunicazioni importanti legate ai servizi dell’app.
-7. Prenotazione pista con opzioni aggiuntive: Integrare una funzionalità che consenta agli utenti di prenotare una pista specifica, con la possibilità di noleggiare attrezzature o veicoli necessari.
-8. Esposizione API: Sviluppare e documentare un'API pubblica che permetta a terze parti di interagire con l'applicazione, consultare piste disponibili, effettuare prenotazioni e altro.
-9. Piattaforma multipiattaforma: Garantire che l'applicazione sia compatibile con dispositivi mobili (Android, iOS) e web, per un'esperienza utente ottimale su tutte le piattaforme.
+#Requisiti Funzionali
+
+##Gestione delle piste
+
+Creare un database che memorizzi tutte le piste italiane registrate, con informazioni dettagliate come descrizione, foto, recensioni degli utenti, posizione geografica e altre informazioni pertinenti.
+##Gestione degli utenti
+
+Creare un sistema di gestione degli utenti registrati, archiviando i dati personali, le prenotazioni attuali e la cronologia delle prenotazioni.
+Consentire la creazione e gestione di profili utente con due tipi di ruoli:
+Guidatore: può prenotare piste.
+Gestore pista: può registrare e gestire nuove piste e la loro disponibilità.
+##Prenotazioni e Opzioni Aggiuntive
+
+Implementare un sistema di prenotazione pista con la possibilità di aggiungere opzioni, come il noleggio di attrezzature o veicoli.
+##Filtri, Ordinamento e Ricerca
+
+Consentire agli utenti di cercare piste con filtri specifici (es. posizione, disponibilità, valutazioni, costo) e di ordinarle in base alle preferenze.
+##API Pubblica
+
+Sviluppare e documentare un'API che permetta a terze parti di interagire con l’applicazione per consultare piste disponibili, effettuare prenotazioni, e altro.
+#Requisiti Non Funzionali
+
+##Architettura Client-Server
+
+Strutturare l’applicazione in due componenti principali:
+Server-side: gestione del database, logica di business delle prenotazioni e comunicazione con i client tramite chiamate HTTP.
+Client-side: interfaccia utente per guidatori e gestori di piste.
+##Compatibilità Multipiattaforma
+
+Assicurare la compatibilità dell’applicazione con dispositivi mobili (Android e iOS) e piattaforma web, per offrire un’esperienza ottimale su tutte le piattaforme.
+##Sicurezza dei Dati
+
+Implementare sistemi di autenticazione e protezione dei dati degli utenti, incluse informazioni personali e storici di prenotazione.
+##Scalabilità
+
+Progettare l’infrastruttura per gestire un elevato numero di utenti e piste, consentendo espansione senza perdita di performance.
+##Affidabilità e Disponibilità
+
+Garantire la disponibilità continua del servizio e un sistema di backup dei dati per prevenire perdite accidentali.
+##Usabilità e Interfaccia Utente Intuitiva
+
+Fornire un’interfaccia utente facile da usare e intuitiva sia per i guidatori che per i gestori di piste, con un design orientato all’esperienza dell’utente.
