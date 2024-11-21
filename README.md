@@ -118,52 +118,112 @@ Response" {
   "vehicles_number": 1
 }
 
-![image](https://github.com/user-attachments/assets/f3c6665f-f055-4dc8-b938-4f99eb78b888)
+![image](https://github.com/user-attachments/assets/2b701d36-6050-433b-b84d-b9bbdf97f757)
 
 
 
 
 
 
-# Requisiti Funzionali
 
-## Gestione delle piste
+#Requisiti Funzionali
+-Gestione delle piste
 
-Creare un database che memorizzi tutte le piste italiane registrate, con informazioni dettagliate come descrizione, foto, recensioni degli utenti, posizione geografica e altre informazioni pertinenti.
-## Gestione degli utenti
+Creare un database per memorizzare tutte le piste italiane con dettagli quali:
+Nome, descrizione, foto, valutazioni, recensioni, posizione geografica, e altre informazioni pertinenti.
+Consentire la visualizzazione e la modifica delle piste registrate da parte dei gestori pista.
+Implementare un sistema per monitorare la disponibilità delle piste.
 
-Creare un sistema di gestione degli utenti registrati, archiviando i dati personali, le prenotazioni attuali e la cronologia delle prenotazioni.
-Consentire la creazione e gestione di profili utente con due tipi di ruoli:
-Guidatore: può prenotare piste.
-Gestore pista: può registrare e gestire nuove piste e la loro disponibilità.
-## Prenotazioni e Opzioni Aggiuntive
+-Gestione degli utenti
 
-Implementare un sistema di prenotazione pista con la possibilità di aggiungere opzioni, come il noleggio di attrezzature o veicoli.
-## Filtri, Ordinamento e Ricerca
+Consentire la registrazione e il login per gli utenti.
+Archiviare informazioni personali, come nome, email e cronologia delle prenotazioni.
+Implementare due ruoli utente:
+Guidatore: può visualizzare le piste e prenotarle.
+Gestore pista: può aggiungere e gestire le proprie piste.
 
-Consentire agli utenti di cercare piste con filtri specifici (es. posizione, disponibilità, valutazioni, costo) e di ordinarle in base alle preferenze.
-## API Pubblica
+-Prenotazioni e opzioni aggiuntive
 
-Sviluppare e documentare un'API che permetta a terze parti di interagire con l’applicazione per consultare piste disponibili, effettuare prenotazioni, e altro.
-# Requisiti Non Funzionali
+Permettere agli utenti di prenotare piste, specificando la data e l'ora.
+Offrire opzioni aggiuntive durante la prenotazione, come:
+Noleggio attrezzature.
+Noleggio veicoli.
+Generare una conferma di prenotazione visibile nel profilo dell’utente.
 
-## Architettura Client-Server
+-Filtri, ordinamento e ricerca
 
-Strutturare l’applicazione in due componenti principali:
-Server-side: gestione del database, logica di business delle prenotazioni e comunicazione con i client tramite chiamate HTTP.
-Client-side: interfaccia utente per guidatori e gestori di piste.
-## Compatibilità Multipiattaforma
+Offrire strumenti di ricerca delle piste utilizzando filtri quali:
+Posizione geografica, valutazioni, costo, disponibilità.
+Consentire l’ordinamento delle piste in base alle preferenze dell’utente (es. prezzo crescente, migliori valutazioni).
 
-Assicurare la compatibilità dell’applicazione con dispositivi mobili (Android e iOS) e piattaforma web, per offrire un’esperienza ottimale su tutte le piattaforme.
-## Sicurezza dei Dati
+-API pubblica
 
-Implementare sistemi di autenticazione e protezione dei dati degli utenti, incluse informazioni personali e storici di prenotazione.
-## Scalabilità
+Sviluppare un’API per permettere a terze parti di:
+Consultare piste disponibili.
+Effettuare prenotazioni.
+Ottenere dati sulle valutazioni e recensioni.
 
-Progettare l’infrastruttura per gestire un elevato numero di utenti e piste, consentendo espansione senza perdita di performance.
-## Affidabilità e Disponibilità
+#Requisiti Non Funzionali
 
-Garantire la disponibilità continua del servizio e un sistema di backup dei dati per prevenire perdite accidentali.
-## Usabilità e Interfaccia Utente Intuitiva
+-Architettura client-server
 
-Fornire un’interfaccia utente facile da usare e intuitiva sia per i guidatori che per i gestori di piste, con un design orientato all’esperienza dell’utente.
+Strutturare l'applicazione in componenti:
+Server-side: gestione database, logica di business e API.
+Client-side: interfaccia utente per web e dispositivi mobili.
+
+-Compatibilità multipiattaforma
+
+Garantire che l’applicazione funzioni su:
+Web browser principali.
+Dispositivi mobili Android e iOS.
+
+-Sicurezza dei dati
+
+Implementare autenticazione sicura (es. login con password hashate e OTP).
+Proteggere i dati con connessioni HTTPS e crittografia.
+
+-Scalabilità
+
+Progettare l’infrastruttura per supportare un elevato numero di utenti e gestori pista.
+Consentire un'espansione modulare del sistema.
+
+-Affidabilità e disponibilità
+
+Garantire un uptime del servizio superiore al 99.9%.
+Implementare backup giornalieri automatici dei dati.
+
+-Usabilità
+
+Offrire un’interfaccia semplice e intuitiva, con tutorial per i nuovi utenti.
+Garantire che l’esperienza utente sia uniforme su tutte le piattaforme.
+
+#Requisiti di Dominio
+
+-Gestione delle piste
+
+Le piste devono essere identificabili univocamente nel database (ID pista).
+Ogni pista può avere un proprietario registrato come gestore pista.
+
+-Utenti
+
+Gli utenti devono essere classificati in due categorie principali:
+Guidatori che effettuano prenotazioni.
+Gestori pista che amministrano la disponibilità delle piste.
+Ogni utente può avere uno storico delle prenotazioni.
+
+-Prenotazioni
+
+Ogni prenotazione è legata a una pista, un utente, una data e un orario.
+Devono essere incluse regole per evitare sovrapposizioni di prenotazioni.
+
+-Opzioni aggiuntive
+
+Le opzioni devono essere configurabili dai gestori pista.
+Ogni opzione aggiuntiva deve avere un costo e un inventario disponibile.
+
+-API
+
+L’API deve fornire endpoint per accedere a:
+Lista delle piste, recensioni e dettagli.
+Disponibilità e opzioni di prenotazione.
+Statistiche sulle valutazioni e recensioni.
