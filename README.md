@@ -126,7 +126,7 @@ Response" {
 
 
 
-#Requisiti Funzionali
+# Requisiti Funzionali
 -Gestione delle piste
 
 Creare un database per memorizzare tutte le piste italiane con dettagli quali:
@@ -163,7 +163,7 @@ Consultare piste disponibili.
 Effettuare prenotazioni.
 Ottenere dati sulle valutazioni e recensioni.
 
-#Requisiti Non Funzionali
+# Requisiti Non Funzionali
 
 -Architettura client-server
 
@@ -197,7 +197,7 @@ Implementare backup giornalieri automatici dei dati.
 Offrire un’interfaccia semplice e intuitiva, con tutorial per i nuovi utenti.
 Garantire che l’esperienza utente sia uniforme su tutte le piattaforme.
 
-#Requisiti di Dominio
+# Requisiti di Dominio
 
 -Gestione delle piste
 
