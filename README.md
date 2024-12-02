@@ -11,6 +11,11 @@ https://www.rseitalia.it/
 https://www.ringspeedmotorsport.com/
 https://www.kaaracing.com/
 
+# Target
+
+- Utenti interessati al noleggio di piste e veicoli
+- Gestori delle piste interessati a registrare la propria per renderla disponibile alla prenotazione sulla piattaforma 
+
 # Esempi Richieste E Risposte API
 
 Creazione profili guidatore:
