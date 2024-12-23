@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Rental Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: #333;
+            color: #fff;
+            padding: 1rem 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+        }
+
+        nav ul li a:hover {
+            background: #555;
+            border-radius: 4px;
+        }
+
+        .account {
+            display: flex;
+            align-items: center;
+        }
+
+        .account a {
+            color: white;
+            text-decoration: none;
+            margin-left: 10px;
+            padding: 8px 16px;
+            background-color: #ff4757;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .account a:hover {
+            background-color: #ff6b81;
+        }
+
+        .user-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .user-image:hover {
+            transform: scale(1.1);
+        }
+
+        .track-panel {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .track-panel h3 {
+            margin-bottom: 10px;
+        }
+
+        .track-panel p {
+            margin-bottom: 5px;
+        }
+
+        .sort-controls {
+            margin: 20px 0;
+        }
+
+        .sort-controls button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        footer {
+            background: #222;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .info-panel {
+            display: none;
+            position: absolute;
+            right: 20px;
+            top: 80px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .info-panel p {
+            margin-bottom: 10px;
+        }
+
+        .search-bar {
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .search-bar input {
+            padding: 10px 20px;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <nav>
+                <div class="logo">
+                    <h1>TrackPlus - Feel The Adrenaline</h1>
+                </div>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#">Contact</a></li>
+                    <li><a href="tracks.html">Book Now</a></li>
+                </ul>
+                <div class="account">
+                    <a href="login.html" id="loginButton">Login</a>
+                    <img id="userImage" class="user-image" src="IMAGES/user.png" alt="User Image" hidden>
+                </div>
+            </nav>
+        </header>
+
+        <div id="userInterface" class="container">
+            <div id="infoPanel" class="info-panel">
+                <h2>Account Information</h2>
+                <p id="userInfoDisplay"></p>
+            </div>
+        </div>
+
+       <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search by city">
+            <button id="searchButton">Search</button>
+       </div>
+
+        <div id="tracksContainer"></div>
+
+        <footer>
+            <p>&copy; 2024 Track Rentals. All Rights Reserved.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        let userInfo;
+        const socket = io('http://localhost:4000');
+
+        window.onload = function () {
+            userInfo = JSON.parse(localStorage.getItem("username"));
+
+            if(!userInfo){
+                window.location.href = "login.html"
+            }
+        }
+
+        socket.on('connect', () =>{
+            console.log("connecter to the server");
+        })
+
+        socket.on('updateTracks', (data) =>{
+            console.log(data.message);
+            fetchTracks(`http://localhost:4000/getTracks?username=${""}`);
+        })
+
+        function fetchTracks(url){
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            console.log("request")
+            xhr.onreadystatechange= function () {
+                console.log("request2")
+                if(xhr.readyState === 4){
+                    console.log("request3")
+                    if(xhr.status === 200){
+                        console.log("request4")
+                        try{
+                            const tracks = JSON.parse(xhr.responseText);
+                            renderTracks(tracks);
+                        }
+                        catch (error){
+                            console.error('JSON Parsing Error', error);
+                        }
+                    }
+                    else{
+                        console.error('request Error', xhr.statusText);
+                    }
+                }
+            };
+            xhr.send();
+        }
+
+
+        function renderTracks(tracks){
+            const tracksContainer = document.getElementById('tracksContainer');
+            tracksContainer.innerHTML = '';
+
+            if(tracks.length === 0){
+                tracksContainer.innerHTML = '<p>No tracks found</p>';
+                return;
+            }
+            tracks.forEach(track => {
+                const trackPanel = createTrackPanel(track);
+                tracksContainer.appendChild(trackPanel);
+            })
+        }
+
+        function createTrackPanel(track){
+            const panel = document.createElement('div');
+            panel.className = 'track-panel';
+
+            const title = document.createElement('h3');
+            title.textContent = track.user;
+            panel.appendChild(title);
+
+            const description = document.createElement('p');
+            description.textContent = `City: ${track.city}`;
+            panel.appendChild(description);
+
+            const wheaterConainer = document.createElement('div');
+            wheaterConainer.className = 'weather-info';
+            wheaterConainer.textContent = 'Loading weather data...';
+            fetch(`http://localhost:4000/getWeather?location=${track.city}`)
+            .then(response => {
+                if(!response.ok){
+                    throw new Error('Failed to load weather data');
+                }
+                return response.json();
+            })
+            .then(data =>{
+                console.log(data);
+                wheaterConainer.innerHTML = `
+                    <p>Temperature: ${data.temperature}C°</p>
+                    <p>Condition: ${data.condition}</p>
+                    <img src="${data.icon}" alt="${data.condition}"/>
+                `;
+                panel.appendChild(wheaterConainer);
+            })
+            .catch(error => {
+                console.error('Error fetching weather data:', error);
+                wheaterConainer.textContent = 'Could not load weather data';
+            })
+
+            return panel;
+        }
+
+        document.getElementById("searchButton").addEventListener('click', function () {
+            const query = document.getElementById('searchInput').value;
+            console.log("request0")
+            fetchTracks(`http://localhost:4000/getTracks?username=${query}`);
+        })
+
+        window.onload = function () {
+            fetchTracks(`http://localhost:4000/getTracks?username=${""}`);
+        }
+
+        document.getElementById('userImage').addEventListener("click", function () {
+            if(userInfo){
+                console.log(userInfo);
+                const userInfoDisplay = `
+                    <strong>Username:</strong> ${userInfo.username}<br>
+                    </strong>Age:</strong> ${userInfo.age}<br>
+                    </strong>City:</strong> ${userInfo.city}<br>
+                    </strong>Email:</strong> ${userInfo.email}<br>
+                    </strong>Phone Number</strong> ${userInfo.phone_number}<br>
+                `
+
+                document.getElementById('userInfoDisplay').innerHTML = userInfoDisplay;
+            }
+
+            document.getElementById('infoPanel').style.display = infoPanel.style.display === 'block' ? "none": "block";
+        })
+    </script>
+</body>
+
+</html>
