@@ -232,3 +232,15 @@ L’API deve fornire endpoint per accedere a:
 Lista delle piste, recensioni e dettagli.
 Disponibilità e opzioni di prenotazione.
 Statistiche sulle valutazioni e recensioni.
+
+
+# INSTALLAZIONE
+-scaricare il file TrackPlus.zip
+-estrarre i contenuti in una cartella
+-scaricare Docker Desktop manualmente
+
+# TEST
+-avviare il file start.bat presente nella cartella estratta
+-avviare un browser a scelta
+-digitare nella barra di ricerca "http://localhost:8080"
+-testare le funzionalità
