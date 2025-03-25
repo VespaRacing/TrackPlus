@@ -235,6 +235,7 @@ Statistiche sulle valutazioni e recensioni.
 
 
 # INSTALLAZIONE
+-Windows
 -scaricare il file TrackPlus.zip
 -estrarre i contenuti in una cartella
 -scaricare Docker Desktop manualmente (richiede amministratore)
