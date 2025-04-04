@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Rental Services - Feel The Adrenaline</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', Arial, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+            color: #fff;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .logo span {
+            color: #ff4757;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 5px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 18px;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            display: block;
+            position: relative;
+        }
+
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #ff4757;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover:after {
+            width: 70%;
+        }
+
+        nav ul li a:hover {
+            color: #ff4757;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .account {
+            display: flex;
+            align-items: center;
+        }
+
+        .account a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            padding: 8px 20px;
+            background: linear-gradient(to right, #ff4757, #ff6b81);
+            border-radius: 30px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+        }
+
+        .account a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
+        }
+
+        /* Hero Section (Not used in this page, but kept for consistency, can be removed) */
+        .hero {
+            position: relative;
+            height: 85vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+            z-index: 1;
+        }
+
+        .hero video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        .hero .center-content {
+            max-width: 800px;
+            padding: 40px;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .hero .center-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .hero .center-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(to right, #ff4757, #ff6b81);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+            margin-top: 20px;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 71, 87, 0.5);
+        }
+
+        /* Services Section (Not used in this page, but kept for consistency, can be removed)*/
+        .services {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 60px;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #333;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: #ff4757;
+            border-radius: 2px;
+        }
+
+        .services-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-item {
+            width: calc(50% - 40px);
+            max-width: 500px;
+            min-width: 300px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            background-color: #fff;
+            cursor: pointer;
+        }
+
+        .service-item img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+            border-bottom: 5px solid #ff4757;
+            transition: transform 0.7s ease;
+        }
+
+        .service-description {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            color: white;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.4s ease;
+            transform: translateY(40px);
+            opacity: 0.9;
+        }
+
+        .service-description h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .service-item:hover .service-description {
+            transform: translateY(0);
+            background: rgba(0, 0, 0, 0.8);
+            opacity: 1;
+            padding-bottom: 40px;
+        }
+
+        .service-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .service-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Testimonials Section (Not used in this page, but kept for consistency, can be removed)*/
+        .testimonials {
+            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .testimonials:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('IMAGES/pattern.png');
+            opacity: 0.05;
+            z-index: 0;
+        }
+
+        .testimonials .section-title {
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonials-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .testimonial-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 50px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .testimonial-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .testimonial-item img {
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            margin: 0 30px;
+            border: 4px solid #ff4757;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .testimonial-content {
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .testimonial-content p:first-child {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .testimonial-content p:first-child:before {
+            content: '"';
+            font-size: 3rem;
+            position: absolute;
+            left: 0;
+            top: -15px;
+            color: #ff4757;
+            font-family: serif;
+        }
+
+        .testimonial-content p:last-child {
+            font-weight: 700;
+            color: #ff4757;
+        }
+
+        /* Footer */
+        footer {
+            background: #222;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Info Panel */
+        .info-panel {
+            display: none;
+            position: absolute;
+            right: 30px;
+            top: 80px;
+            background-color: white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            padding: 25px;
+            border-radius: 10px;
+            z-index: 1000;
+            max-width: 350px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .info-panel h2 {
+            color: #333;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ff4757;
+            padding-bottom: 8px;
+        }
+
+        .info-panel p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        /* User Image */
+        .user-image {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border: 2px solid white;
+            margin-left: 15px;
+        }
+
+        .user-image:hover {
+            transform: scale(1.1);
+            border-color: #ff4757;
+        }
+
+        /* Admin Dashboard (Not used in this page, but kept for consistency, can be removed) */
+        #adminInterface {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        #adminInterface h2 {
+            margin-bottom: 25px;
+            color: #333;
+            border-bottom: 2px solid #ff4757;
+            padding-bottom: 10px;
+        }
+
+        #adminInterface ul {
+            list-style: none;
+        }
+
+        #adminInterface li {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #adminInterface button {
+            padding: 8px 15px;
+            background: #ff4757;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #adminInterface button:hover {
+            background: #ff6b81;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero .center-content h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                padding: 15px;
+                text-align: center;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+                justify-content: center;
+            }
+
+            nav ul {
+                margin: 15px 0;
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            nav ul li {
+                margin: 5px;
+            }
+
+            .hero {
+                height: 70vh;
+            }
+
+            .hero .center-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .services-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .service-item {
+                width: 90%;
+                max-width: none;
+            }
+
+            .testimonial-item {
+                flex-direction: column;
+                text-align: center;
+                margin-bottom: 30px;
+            }
+
+            .testimonial-item img {
+                margin: 0 0 20px 0;
+            }
+
+            .testimonial-content {
+                text-align: center;
+            }
+
+            .testimonial-content p:first-child {
+                padding-left: 0;
+            }
+
+            .testimonial-content p:first-child:before {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero .center-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero .center-content p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Vehicle Panel Styles */
+        .vehicle-panel {
+            border: 1px solid #ddd;
+            /* Light grey border */
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            /* Rounded corners */
+            background-color: #fff;
+            /* White background */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            /* Soft shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* Hover effect */
+        }
+
+        .vehicle-panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .vehicle-panel h3 {
+            color: #333;
+            /* Dark grey title */
+            margin-bottom: 10px;
+            font-weight: 700;
+            /* Bold title */
+            font-size: 1.7rem;
+        }
+
+        .vehicle-panel p {
+            color: #555;
+            /* Medium grey text */
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        /* Sort Controls Styles */
+        .sort-controls {
+            margin: 20px 0;
+            text-align: center;
+            /* Center buttons */
+        }
+
+        .sort-controls button {
+            padding: 12px 25px;
+            margin: 5px 10px;
+            /* Spacing between buttons */
+            border: none;
+            background: linear-gradient(to right, #ff4757, #ff6b81);
+            /* Gradient background */
+            color: white;
+            cursor: pointer;
+            border-radius: 30px;
+            /* Rounded buttons */
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.3);
+            /* Button shadow */
+        }
+
+        .sort-controls button:hover {
+            background: linear-gradient(to right, #ff6b81, #ff4757);
+            /* Reverse gradient on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(255, 71, 87, 0.5);
+            /* Enhanced shadow on hover */
+        }
+
+
+        /* Info Panel adjustments to match index.html */
+        .info-panel {
+            display: none;
+            position: absolute;
+            right: 30px;
+            /* Adjusted to match index.html */
+            top: 80px;
+            /* Adjusted to match index.html */
+            background-color: white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            padding: 25px;
+            /* Adjusted to match index.html */
+            border-radius: 10px;
+            z-index: 1000;
+            max-width: 350px;
+            /* Adjusted to match index.html */
+            animation: fadeIn 0.3s ease;
+        }
+
+        .info-panel h2 {
+            color: #333;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ff4757;
+            padding-bottom: 8px;
+            font-size: 1.5rem;
+            /* Match logo font size, adjust as needed */
+        }
+
+        .info-panel p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>Track<span>Plus</span> <i class="fas fa-flag-checkered"></i></h1>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="tracks.html">Book Now</a></li>
+            </ul>
+            <div class="account">
+                <a href="login.html" id="logoutButton"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                <img id="userImage" class="user-image" src="IMAGES/user.png" alt="User Image" hidden>
+            </div>
+        </nav>
+    </header>
+
+    <div id="infoPanel" class="info-panel">
+        <h2><i class="fas fa-user-circle"></i> Account Information</h2>
+        <p id="userInfoDisplay"></p>
+    </div>
+
+    <div class="container">
+        <div id="userInterface" class="container">
+        </div>
+
+        <div class="sort-controls">
+            <button id="sortByName">Sort by Name</button>
+            <button id="sortByCity">Sort by City</button>
+        </div>
+
+        <div id="vehiclesContainer"></div>
+        <footer>
+            <p>© 2024 TrackPlus. All Rights Reserved. <i class="fas fa-flag-checkered"></i></p>
+            <div style="margin-top: 10px;">
+                <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-facebook"></i></a>
+                <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-instagram"></i></a>
+                <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-twitter"></i></a>
+                <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-youtube"></i></a>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let userInfo;
+
+        window.onload = function () {
+            //checkSession(); // Call checkSession on page load
+        };
+
+        async function checkSession() {
+            try {
+                fetch("/session", {
+                    method: "GET",
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                if (response.status === 200) {
+                    const sessionData = await response.json();
+                    userInfo = sessionData.user;
+                    initializeUI();
+                    loadVehicles(); // Load vehicles after session is confirmed and UI is initialized
+                } else {
+                    window.location.href = "login.html";
+                }
+            } catch (error) {
+                console.error("Session check error:", error);
+                window.location.href = "login.html";
+            }
+        }
+
+        function initializeUI() {
+            document.getElementById("logoutButton").style.display = "block";
+            document.getElementById("userImage").style.display = "block";   // Show user image
+        }
+
+
+        document.getElementById("userImage").addEventListener("click", async function () {
+            if (userInfo) {
+                console.log(userInfo);
+                let userInfoDisplay = `
+                    <strong><i class="fas fa-id-card"></i> User ID:</strong> ${userInfo.id}<br>
+                    <strong><i class="fas fa-envelope"></i> Email:</strong> ${userInfo.email}<br>
+                `;
+                if (userInfo.loginType === 'standard') {
+                    userInfoDisplay += `
+                        <strong><i class="fas fa-user"></i> Username:</strong> ${userInfo.username}<br>
+                        <strong><i class="fas fa-calendar-alt"></i> Age:</strong> ${userInfo.age}<br>
+                        <strong><i class="fas fa-city"></i> City:</strong> ${userInfo.city}<br>
+                        <strong><i class="fas fa-phone"></i> Phone Number:</strong> ${userInfo.phone_number}<br>
+                    `;
+                } else if (userInfo.loginType === 'google') {
+                    userInfoDisplay += `
+                        <strong><i class="fas fa-user"></i> Name:</strong> ${userInfo.displayName}<br>
+                        <strong><i class="fas fa-sign-in-alt"></i> Login Type:</strong> Google<br>
+                    `;
+                    if (userInfo.profilePicture) {
+                        userInfoDisplay += `<img src="${userInfo.profilePicture}" alt="Profile Picture" style="width: 80px; border-radius: 50%; margin-top: 10px; border: 3px solid #ff4757;"><br>`;
+                    }
+                }
+
+                document.getElementById('userInfoDisplay').innerHTML = userInfoDisplay;
+            }
+
+            const infoPanel = document.getElementById('infoPanel');
+            infoPanel.style.display = infoPanel.style.display === 'block' ? "none" : "block";
+
+            // Logout functionality added here
+            if (infoPanel.style.display === 'block') { // Only add logout if panel is being displayed
+                // The logout button is already in the header now. No need to create it here dynamically.
+            }
+        });
+
+
+        let vehiclesData = [];
+
+
+        function createvehiclePanel(vehicle) {
+            const panel = document.createElement('div');
+            panel.className = 'vehicle-panel';
+
+            const title = document.createElement('h3');
+            title.textContent = vehicle.name;
+            panel.appendChild(title);
+
+            const track = document.createElement('p');
+            track.textContent = `City: ${vehicle.track}`;
+            panel.appendChild(track);
+
+            const user = document.createElement('p');
+            user.textContent = `User: ${vehicle.username}`;
+            panel.appendChild(user);
+
+            const date = document.createElement('p');
+            date.textContent = `Date: ${vehicle.date}`;
+            panel.appendChild(date);
+
+            const number = document.createElement('p');
+            number.textContent = `Number: ${vehicle.vehicles_number}`;
+            panel.appendChild(number);
+
+            return panel;
+        }
+
+        function rendervehicles(vehicles) {
+            const vehiclesContainer = document.getElementById('vehiclesContainer');
+            vehiclesContainer.innerHTML = '';
+
+            vehicles.forEach(vehicle => {
+                const vehiclePanel = createvehiclePanel(vehicle);
+                vehiclesContainer.appendChild(vehiclePanel);
+            });
+        }
+
+
+        function loadVehicles() {
+            fetch('/getvehicles')
+                .then(response => response.json())
+                .then(vehicles => {
+                    vehiclesData = vehicles;
+                    rendervehicles(vehicles);
+                })
+                .catch(error => {
+                    console.error('Error fetching vehicles:', error);
+                });
+        }
+
+        document.getElementById('sortByName').addEventListener('click', function () {
+            const sortedvehicles = [...vehiclesData].sort((a, b) => a.user.localeCompare(b.user));
+            rendervehicles(sortedvehicles);
+        });
+
+        document.getElementById('sortByCity').addEventListener('click', function () {
+            const sortedvehicles = [...vehiclesData].sort((a, b) => a.city.localeCompare(b.city));
+            rendervehicles(sortedvehicles);
+        });
+
+        document.getElementById("logoutButton").addEventListener("click", async function () {
+            try {
+                const response = await fetch('/logout');
+                if (response.status === 200) {
+                    window.location.href = "login.html";
+                } else {
+                    alert('Logout failed');
+                }
+            } catch (error) {
+                console.error("Logout error:", error);
+                alert('Logout failed due to an error');
+            }
+        });
+
+        // Close info panel when clicking outside
+        window.addEventListener('click', function (e) {
+            const infoPanel = document.getElementById('infoPanel');
+            const userImage = document.getElementById('userImage');
+
+            if (infoPanel.style.display === 'block' && e.target !== infoPanel && !infoPanel.contains(e.target) && e.target !== userImage) {
+                infoPanel.style.display = 'none';
+            }
+        });
+
+
+    </script>
+</body>
+
+</html>

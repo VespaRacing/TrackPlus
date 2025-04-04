@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .background-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .container {
+            background-color: rgba(255, 2555, 255, 0.9);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .toggle-link {
+            display: block;
+            margin-top: 10px;
+            text-align: center;
+            cursor: pointer;
+            color: #007bff;
+        }
+
+        .toggle-link:hover {
+            text-decoration: underline;
+        }
+
+        .user-track-toggle {
+            margin-bottom: 15px;
+        }
+    </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+
+<body>
+    <img src="IMAGES/homeImage.jpg" alt="background" class="background-img">
+
+    <div class="container" id="login-container">
+        <h2>Login</h2>
+        <div class="user-track-toggle">
+            <label for="login-type">Login as:</label>
+            <select id="login-type">
+                <option value="user">User</option>
+                <option value="track">Track</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter username/trackname" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter password" required>
+        </div>
+        <button onclick="login()">Login</button>
+        <span class="toggle-link" onclick="toggleForms()">Don't have an account? Register</span>
+
+        <a href="/auth/google">Login Google</a>
+    </div>
+    <br>
+
+    <div class="container" id="registration-container" style="display:none;">
+        <h2>Register</h2>
+        <div class="user-track-toggle">
+            <label for="reg-type">Register as:</label>
+            <select id="reg-type" onchange="toggleRegistrationFields()">
+                <option value="user">User</option>
+                <option value="track">Track</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="reg-username">Username</label>
+            <input type="text" id="reg-username" placeholder="Enter username" required>
+        </div>
+        <div class="form-group">
+            <label for="reg-password">Password</label>
+            <input type="password" id="reg-password" placeholder="Enter password" required>
+        </div>
+        <div class="form-group" id="user-age-group">
+            <label for="age">Age</label>
+            <input type="number" id="age" placeholder="Enter age" required>
+        </div>
+        <div class="form.group">
+            <label for="city">City</label>
+            <input type="text" id="city" placeholder="Enter city" required>
+        </div>
+        <div class="form.group" id="user-email-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Enter email" required>
+        </div>
+        <div class="form.group" id="user-phone-group">
+            <label for="phone_number">Phone Number</label>
+            <input type="text" id="phone_number" placeholder="Enter phone number" required>
+        </div>
+        <button onclick="register()">Register</button>
+        <span class="toggle-link" onclick="toggleForms()">Arleady have an account? Login</span>
+
+    </div>
+
+
+    <script>
+        async function checkSessionStatus() {
+            try {
+                fetch("/session", {
+                    method: "GET",
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                if (response.ok) {
+                    window.location.href = 'index.html'; // Redirect to index.html if session exists
+                } else {
+                    // Session does not exist or is invalid, do nothing, show login page
+                    console.log('No active session, showing login page.');
+                }
+            } catch (error) {
+                console.error('Error checking session status:', error);
+                // Handle error, maybe show login page anyway
+            }
+        }
+
+        //window.onload = checkSessionStatus; // Call checkSessionStatus when the page loads
+
+
+        function toggleForms() {
+            const loginContainer = document.getElementById('login-container');
+            const registrationContainer = document.getElementById('registration-container');
+            loginContainer.style.display = loginContainer.style.display === 'none' ? 'block' : 'none';
+            registrationContainer.style.display = registrationContainer.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function toggleRegistrationFields() {
+            const regType = document.getElementById('reg-type').value;
+            const userFields = ['user-age-group', 'user-email-group', 'user-phone-group'];
+
+            if (regType === 'track') {
+                userFields.forEach(field => document.getElementById(field).style.display = 'none');
+            }
+            else {
+                userFields.forEach(field => document.getElementById(field).style.display = 'block');
+            }
+        }
+
+        async function login() {
+            const loginType = document.getElementById('login-type').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const endpoint = loginType === 'user' ? "/loginUser" : "/loginTrack";
+
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            });
+
+            const result = await response.json();
+            // Removed localStorage.setItem("username", JSON.stringify(result)); - Not needed for cookie-based sessions
+            if (response.ok) {
+                window.location.href = "index.html";
+            }
+            else {
+                alert(`Login failed: ${result.message}`);
+            }
+        }
+
+        async function register() {
+            const regType = document.getElementById('reg-type').value;
+            const regUsername = document.getElementById('reg-username').value;
+            const regPassword = document.getElementById('reg-password').value;
+            const city = document.getElementById('city').value;
+
+            const endpoint = regType === 'user' ? '/registerUser' : '/registerTrack';
+
+            const requestBody = {
+                username: regUsername,
+                password: regPassword,
+                city: city,
+            };
+
+            if (regType === 'user') {
+                const age = document.getElementById('age').value;
+                const email = document.getElementById('email').value;
+                const phone_number = document.getElementById('phone_number').value;
+                Object.assign(requestBody, { age, email, phone_number });
+            }
+            console.log(requestBody);
+
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                alert(`${regType.charAt(0).toUpperCase() + regType.slice(1)} registration successful!`);
+                toggleForms();
+            }
+            else {
+                alert(`Registration failed: ${result.message}`);
+            }
+        }
+
+        toggleRegistrationFields();
+    </script>
+</body>
+
+</html>

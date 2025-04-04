@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Track Rental Services</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    /* Global resets and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+
+    body {
+      line-height: 1.6;
+      color: #333;
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Header & Navigation */
+    header {
+      background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+      color: #fff;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 30px;
+    }
+
+    .logo h1 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .logo span {
+      color: #ff4757;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+    }
+
+    nav ul li {
+      margin: 0 5px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 18px;
+      font-weight: 600;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      display: block;
+      position: relative;
+    }
+
+    nav ul li a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: #ff4757;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: width 0.3s;
+    }
+
+    nav ul li a:hover:after {
+      width: 70%;
+    }
+
+    nav ul li a:hover {
+      color: #ff4757;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .account {
+      display: flex;
+      align-items: center;
+    }
+
+    .account a {
+      color: white;
+      text-decoration: none;
+      margin-left: 15px;
+      padding: 8px 20px;
+      background: linear-gradient(to right, #ff4757, #ff6b81);
+      border-radius: 30px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+    }
+
+    .account a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
+    }
+
+    .user-image {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      border: 2px solid white;
+      margin-left: 15px;
+    }
+
+    .user-image:hover {
+      transform: scale(1.1);
+      border-color: #ff4757;
+    }
+
+    /* Info Panel */
+    .info-panel {
+      display: none;
+      position: absolute;
+      right: 30px;
+      top: 80px;
+      background-color: white;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      padding: 25px;
+      border-radius: 10px;
+      z-index: 1000;
+      max-width: 350px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .info-panel h2 {
+      color: #333;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #ff4757;
+      padding-bottom: 8px;
+    }
+
+    .info-panel p {
+      margin-bottom: 15px;
+      line-height: 1.7;
+    }
+
+    /* Search Bar */
+    .search-bar {
+      margin: 20px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .search-bar input {
+      padding: 10px 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      flex: 1;
+      margin-right: 10px;
+    }
+
+    .search-bar button {
+      padding: 10px 20px;
+      border: none;
+      background: #222;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .search-bar button:hover {
+      background: #555;
+    }
+
+    /* Track Panel */
+    .track-panel {
+      border: 1px solid #ddd;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+      background-color: #fff;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .track-panel h3 {
+      margin-bottom: 10px;
+    }
+
+    .track-panel p {
+      margin-bottom: 5px;
+    }
+
+    /* Footer */
+    footer {
+      background: #222;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+        <h1>Track<span>Plus</span> <i class="fas fa-flag-checkered"></i></h1>
+      </div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#">Contact</a></li>
+        <li><a href="tracks.html">Book Now</a></li>
+      </ul>
+      <div class="account">
+        <a href="login.html" id="loginButton">Login</a>
+        <img id="userImage" class="user-image" src="IMAGES/user.png" alt="User Image" hidden />
+      </div>
+    </nav>
+  </header>
+
+  <div class="container" id="userInterface">
+    <div id="infoPanel" class="info-panel">
+      <h2>Account Information</h2>
+      <p id="userInfoDisplay"></p>
+    </div>
+
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search by city" />
+      <button id="searchButton">Search</button>
+    </div>
+
+    <div id="tracksContainer"></div>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 Track Rentals. All Rights Reserved.</p>
+  </footer>
+
+  <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+  <script>
+    let userInfo;
+    const socket = io('');
+
+    window.onload = function () {
+      //checkSession(); // Call checkSession on page load
+      fetchTracks(`/getTracks?username=${""}`); // Fetch tracks after session check
+    };
+
+    async function checkSession() {
+      try {
+        fetch("/session", {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        if (response.status === 200) {
+          const sessionData = await response.json();
+          userInfo = sessionData.user;
+          initializeUI();
+        } else {
+          window.location.href = "login.html";
+        }
+      } catch (error) {
+        console.error("Session check error:", error);
+        window.location.href = "login.html";
+      }
+    }
+
+    function initializeUI() {
+      document.getElementById("loginButton").style.display = "none"; // Hide login button
+      document.getElementById("userImage").style.display = "block"; // Show user image
+    }
+
+    socket.on('connect', () => {
+      console.log("connected to the server");
+    });
+
+    socket.on('updateTracks', (data) => {
+      console.log(data.message);
+      fetchTracks(`/getTracks?username=${""}`);
+    });
+
+    function fetchTracks(url) {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', url, true);
+      console.log("request");
+      xhr.onreadystatechange = function () {
+        console.log("request2");
+        if (xhr.readyState === 4) {
+          console.log("request3");
+          if (xhr.status === 200) {
+            console.log("request4");
+            try {
+              const tracks = JSON.parse(xhr.responseText);
+              renderTracks(tracks);
+            } catch (error) {
+              console.error('JSON Parsing Error', error);
+            }
+          } else {
+            console.error('Request Error', xhr.statusText);
+          }
+        }
+      };
+      xhr.send();
+    }
+
+    function renderTracks(tracks) {
+      const tracksContainer = document.getElementById('tracksContainer');
+      tracksContainer.innerHTML = '';
+
+      if (tracks.length === 0) {
+        tracksContainer.innerHTML = '<p>No tracks found</p>';
+        return;
+      }
+      tracks.forEach(track => {
+        const trackPanel = createTrackPanel(track);
+        tracksContainer.appendChild(trackPanel);
+      });
+    }
+
+    function createTrackPanel(track) {
+      const panel = document.createElement('div');
+      panel.className = 'track-panel';
+
+      const title = document.createElement('h3');
+      title.textContent = track.user;
+      panel.appendChild(title);
+
+      const description = document.createElement('p');
+      description.textContent = `City: ${track.city}`;
+      panel.appendChild(description);
+
+      const weatherContainer = document.createElement('div');
+      weatherContainer.className = 'weather-info';
+      weatherContainer.textContent = 'Loading weather data...';
+      fetch(`/getWeather?location=${track.city}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to load weather data');
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log(data);
+          weatherContainer.innerHTML = `
+            <p>Temperature: ${data.temperature}C°</p>
+            <p>Condition: ${data.condition}</p>
+            <img src="${data.icon}" alt="${data.condition}">
+          `;
+          panel.appendChild(weatherContainer);
+        })
+        .catch(error => {
+          console.error('Error fetching weather data:', error);
+          weatherContainer.textContent = 'Could not load weather data';
+        });
+
+      return panel;
+    }
+
+    document.getElementById("searchButton").addEventListener('click', function () {
+      const query = document.getElementById('searchInput').value;
+      console.log("request0");
+      fetchTracks(`/getTracks?username=${query}`);
+    });
+
+    document.getElementById('userImage').addEventListener("click", async function () {
+      if (userInfo) {
+        console.log(userInfo);
+        let userInfoDisplay = `
+          <strong>User ID:</strong> ${userInfo.userId}<br>
+          <strong>Email:</strong> ${userInfo.email}<br>
+        `;
+        if (userInfo.loginType === 'standard') {
+          userInfoDisplay += `
+            <strong>Username:</strong> ${userInfo.username}<br>
+            <strong>Age:</strong> ${userInfo.age}<br>
+            <strong>City:</strong> ${userInfo.city}<br>
+            <strong>Phone Number:</strong> ${userInfo.phone_number}<br>
+          `;
+        } else if (userInfo.loginType === 'google') {
+          userInfoDisplay += `
+            <strong>Name:</strong> ${userInfo.displayName}<br>
+            <strong>Login Type:</strong> Google<br>
+          `;
+          if (userInfo.profilePicture) {
+            userInfoDisplay += `<img src="${userInfo.profilePicture}" alt="Profile Picture" style="width: 50px; border-radius: 50%;"><br>`;
+          }
+        }
+        document.getElementById('userInfoDisplay').innerHTML = userInfoDisplay;
+      }
+
+      const infoPanel = document.getElementById('infoPanel');
+      infoPanel.style.display = infoPanel.style.display === 'block' ? "none" : "block";
+
+      // Logout functionality added here
+      if (infoPanel.style.display === 'block') {
+        const logoutButton = document.createElement('button');
+        logoutButton.textContent = 'Logout';
+        logoutButton.style.marginTop = '10px';
+        logoutButton.addEventListener('click', async function () {
+          try {
+            const response = await fetch('/logout');
+            if (response.status === 200) {
+              window.location.href = "login.html";
+            } else {
+              alert('Logout failed');
+            }
+          } catch (error) {
+            console.error("Logout error:", error);
+            alert('Logout failed due to an error');
+          }
+        });
+
+        // Check if logout button already exists to prevent duplicates
+        if (!infoPanel.querySelector('button')) {
+          infoPanel.appendChild(logoutButton);
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
