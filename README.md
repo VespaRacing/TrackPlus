@@ -244,3 +244,7 @@ Statistiche sulle valutazioni e recensioni.
 -Avviare un browser a scelta
 -Digitare nella barra di ricerca "http://localhost:8080"
 -Testare le funzionalità
+
+# DOCKER HUB IMAGES DOWNLOAD
+Backend: https://hub.docker.com/repository/docker/gabbopro2006/trackplus-backend
+Frontend: https://hub.docker.com/repository/docker/gabbopro2006/trackplus-frontend
