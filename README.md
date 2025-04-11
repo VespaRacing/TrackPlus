@@ -236,12 +236,11 @@ Statistiche sulle valutazioni e recensioni.
 
 # INSTALLAZIONE
 -Windows
--scaricare il file TrackPlus.zip
--estrarre i contenuti in una cartella
--scaricare Docker Desktop manualmente (richiede amministratore)
+-Scaricare il contenuto di questo repository
+-Scaricare Docker Desktop manualmente (richiede amministratore)
 
 # TEST
--avviare il file start.bat presente nella cartella estratta
--avviare un browser a scelta
--digitare nella barra di ricerca "http://localhost:8080"
--testare le funzionalità
+-Avviare il file start.bat
+-Avviare un browser a scelta
+-Digitare nella barra di ricerca "http://localhost:8080"
+-Testare le funzionalità
