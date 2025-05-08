@@ -235,15 +235,12 @@ Statistiche sulle valutazioni e recensioni.
 
 
 # INSTALLAZIONE
--Windows
--Scaricare il contenuto di questo repository
--Scaricare Docker Desktop manualmente (richiede amministratore)
-
-# TEST
--Avviare il file start.bat
--Avviare un browser a scelta
--Digitare nella barra di ricerca "http://localhost:8080"
--Testare le funzionalità
+-Aprire GitHub Codespaces e creare un codespace con "blank" template
+-Apire il terminal
+-Eseguire questo comando: "docker pull gabbopro2006/trackplus-app" per scaricare l'immagine
+-Eseguire questo comando per avviare l'immagine: "docker run -d -p 8080:4000 -e APIKEY="WEATHERAPIKEY" -e PORT="4000" gabbopro2006/trackplus-app"
+-Premere "Apri Nel Browser"
+Esempio Weather APIKey: fff11a1009fe4fb18d584918241512
 
 # DOCKER HUB IMAGES DOWNLOAD
 Backend: https://hub.docker.com/repository/docker/gabbopro2006/trackplus-backend
